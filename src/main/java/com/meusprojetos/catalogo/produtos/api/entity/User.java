@@ -1,6 +1,6 @@
 package com.meusprojetos.catalogo.produtos.api.entity;
 
-import com.meusprojetos.catalogo.produtos.api.enums.RoleEnum;
+import com.meusprojetos.catalogo.produtos.api.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,11 +28,11 @@ public class User implements UserDetails {
     private String username;
     private String email;
     private String password;
-    private RoleEnum role;
+    private UserRole role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == RoleEnum.ADMIN) {
+        if (this.role == UserRole.ADMIN) {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_ADMIN"),
                     new SimpleGrantedAuthority("ROLE_USER")
